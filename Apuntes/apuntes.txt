@@ -1,0 +1,2 @@
+Acerca más de templates Angular
+https://profile.es/blog/angular-templates-las-directivas-ng-template-ng-container-y-ngtemplateoutlet/
