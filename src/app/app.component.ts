@@ -17,6 +17,38 @@ export class AppComponent {
     img: 'https://cdn.wallpapersafari.com/34/71/QCeSFc.jpg',
   };
   names:string[] =["Daniel","Julian", "Edgar" ]
+  products = [
+    {
+      name: 'EL mejor juguete',
+      price: 565,
+      image: '../assets/images/toy.jpg'
+    },
+    {
+      name: 'Bicicleta casi nueva',
+      price: 565,
+      image: '../assets/images/bike.jpg'
+    },
+    {
+      name: 'Colleción de albumnes',
+      price: 565,
+      image: '../assets/images/album.jpg'
+    },
+    {
+      name: 'Mis libros',
+      price: 565,
+      image: '../assets/images/books.jpg.jpg'
+    },
+    {
+      name: 'Case para perro',
+      price: 565,
+      image: '../assets/images/house.jpg'
+    },
+    {
+      name: 'Gafas',
+      price: 565,
+      image: '../assets/images/glass.jpg'
+    }
+  ]
   toggleButton() {
     this.buttonDesabled = !this.buttonDesabled;
   }
