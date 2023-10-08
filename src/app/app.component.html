@@ -1,52 +1,132 @@
+<h1>Formulario</h1>
+<form (ngSubmit)="onRegister()" #myForm="ngForm">
+  <div class="input-group">
+    <label for="name">Nombre</label>
+    <input type="text" id="name" name="name" required [(ngModel)]="registro.name" />
+    <p>Mensaje de Error</p>
+  </div>
+  <div class="input-group">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required [(ngModel)]="registro.email" />
+    <p>Mensaje de Error</p>
+  </div>
+  <div class="input-group">
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required [(ngModel)]="registro.password" />
+    <p>Mensaje de Error</p>
+  </div>
+  <button [disabled]="myForm.invalid" type="submit">Registrar</button>
+  <button type="button">Registrar</button>
+</form>
+<hr />
+<h1>NgClass & NgStyle</h1>
+<input type="text" required #nameInput4="ngModel" [(ngModel)]="person.name" />
+<hr
+  class="line-error"
+  [ngClass]="{ valid: nameInput4.valid, invalid: nameInput4.invalid }"
+/>
+<p class="message-error" [class.active]="nameInput4.invalid">
+  El campo es requerido
+</p>
+<div class="styles">
+  <div>
+    <input type="number" [(ngModel)]="box.width" />
+    <input type="number" [(ngModel)]="box.height" />
+    <input type="color" [(ngModel)]="box.backGround" />
+  </div>
+  <div>
+    <div
+      [ngStyle]="{
+        'width.px': box.width,
+        'height.px': box.height,
+        'background-color': box.backGround,
+        display: 'block'
+      }"
+    ></div>
+  </div>
+</div>
+<hr />
+<h1>Class & Style</h1>
+<input type="text" required #nameInput2="ngModel" [(ngModel)]="person.name" />
+<p class="message-error" [class.active]="nameInput2.invalid">
+  El campo es requerido
+</p>
+<label>Nombre</label>
+<input type="text" required #nameInput3="ngModel" [(ngModel)]="person.name" />
+<p [style.font-style]="nameInput3.invalid ? 'italic' : 'normal'">
+  Lorem ipsum dolor sit.
+</p>
+<div class="styles">
+  <div><input type="text" [(ngModel)]="widthImg" /></div>
+  <div><img src="{{ img }}" alt="Imagen" [style.width.%]="widthImg" /></div>
+</div>
+<hr />
 <h1>*ngswitch</h1>
-<input type="text" required #nameInput="ngModel" [(ngModel)]="person.name"/>
+<input type="text" required #nameInput="ngModel" [(ngModel)]="person.name" />
 <div [ngSwitch]="person.name">
-  <p *ngSwitchCase="'nicolas'">Soy Nicolas</p>
-  <p *ngSwitchCase="'julian'">Soy Julian</p>
+  <p *ngSwitchCase="'nicolas'">La persona es Nicolas</p>
+  <p *ngSwitchCase="'julian'">La persona es Julian</p>
+  <p *ngSwitchCase="'camilo'">La persona es {{ person.name }}</p>
   <p *ngSwitchDefault>No hace match</p>
 </div>
 
 <h1>*ngFor Objectos</h1>
-<div>
+<div class="products--grid">
   <div *ngFor="let producto of products">
-    <img [src]="producto.image" alt="image">
-    <h2>{{producto.price}}</h2>
-    <h2>{{producto.name}}</h2>
+    <img [src]="producto.image" alt="image" />
+    <h2>{{ producto.price }}</h2>
+    <p>{{ producto.name }}</p>
   </div>
 </div>
 <h1>*ngFor</h1>
-<input type="text" required #nameInput="ngModel" [(ngModel)]="newName"/>
+<input type="text" required #nameInput="ngModel" [(ngModel)]="newName" />
 <button (click)="addName()">Add Name</button>
 <ul>
   <p *ngIf="names.length === 0">No hay nombres en la lista</p>
-  <li *ngFor="let name of names; index as i">{{i+1}} {{name}} <button (click)="deleteName(i)">Eliminar</button></li>
+  <li *ngFor="let name of names; index as i">
+    {{ i + 1 }} {{ name }} <button (click)="deleteName(i)">Eliminar</button>
+  </li>
 </ul>
 <h1>*ngIf</h1>
-<input type="text" required #nameInput="ngModel" [(ngModel)]="person.name"/>
+<input type="text" required #nameInput="ngModel" [(ngModel)]="person.name" />
 <p *ngIf="person.name == 'Daniel'">Soy Daniel</p>
-<p *ngIf="person.name == 'Julian' && person.age === 18; else myblock">Soy Julian</p>
+<p *ngIf="person.name == 'Julian' && person.age === 18; else myblock">
+  Soy Julian
+</p>
 <ng-template #myblock>
-<p>Block de else</p>
+  <p>Block de else</p>
 </ng-template>
-<hr>
+<hr />
 <h1>NgModel</h1>
-<input type="text" required #nameInput="ngModel" [(ngModel)]="person.name"/>
-<p>"Nombre: " + {{person.name}} </p>
-<p>Valido: {{nameInput.valid}}</p>
-<input type="number"  max="18" min="10" required #ageInput="ngModel" [(ngModel)]="person.age"/>
-<p>"Edad: " + {{person.age}} </p>
-<p>Valido: {{ageInput.valid}}</p>
+<input type="text" required #nameInput="ngModel" [(ngModel)]="person.name" />
+<p>"Nombre: " + {{ person.name }}</p>
+<p>Valido: {{ nameInput.valid }}</p>
+<input
+  type="number"
+  max="18"
+  min="10"
+  required
+  #ageInput="ngModel"
+  [(ngModel)]="person.age"
+/>
+<p>"Edad: " + {{ person.age }}</p>
+<p>Valido: {{ ageInput.valid }}</p>
 
 <h1>Eventos</h1>
 <button (click)="toggleButton()">Toggle Button</button>
 <button disabled="disabled" [disabled]="buttonDesabled">Enviar</button>
-<p>Edad: {{person.age}}</p>
+<p>Edad: {{ person.age }}</p>
 <button (click)="increaseAge()">Age ++</button>
 <div class="box" (scroll)="onscroll($event)">
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia vel corrupti architecto culpa deserunt eius cumque? Illo cum ipsa exercitationem accusamus animi, harum distinctio quibusdam officiis! Praesentium sapiente molestiae debitis.</p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia vel
+    corrupti architecto culpa deserunt eius cumque? Illo cum ipsa exercitationem
+    accusamus animi, harum distinctio quibusdam officiis! Praesentium sapiente
+    molestiae debitis.
+  </p>
 </div>
-<input type="text" [value]="person.name" (keyup)="changeName($event)"/>
-<p>"Nombre " + {{person.name}} </p>
+<input type="text" [value]="person.name" (keyup)="changeName($event)" />
+<p>"Nombre " + {{ person.name }}</p>
 
 <h1>Propiedades</h1>
 <button disabled="disabled" [disabled]="buttonDesabled">Enviar</button>
@@ -57,4 +137,4 @@
 <h2>{{ "Hola Mundo".repeat(5) }}</h2>
 <p>3 + 3 = {{ 3 + 3 }}</p>
 <h3>{{ "Hola soy " + name + " y tengo " + age + "años" }}</h3>
-<img src="{{ img }}" alt="Imagen" [height]="500" [width]="1000" />
+<img src="{{ img }}" alt="Imagen" [height]="500" [width]="600" />
